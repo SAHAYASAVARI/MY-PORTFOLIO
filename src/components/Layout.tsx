@@ -11,7 +11,7 @@ export function Layout({ children }: LayoutProps) {
     <div className="min-h-screen bg-background text-foreground relative">
       <ParticleBackground />
       <Navbar />
-      <main className="pt-16">
+      <main>
         {children}
       </main>
     </div>
