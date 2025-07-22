@@ -7,7 +7,7 @@ import { Badge } from '../components/ui/badge';
 import { Input } from '../components/ui/input';
 import { Textarea } from '../components/ui/textarea';
 import { useToast } from '../hooks/use-toast';
-import profileImage from '../assets/profile-photo.jpg';
+
 
 export function PortfolioHome() {
   const { toast } = useToast();
@@ -201,7 +201,7 @@ export function PortfolioHome() {
             >
               <div className="w-80 h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden glass-card p-2 glow-effect animate-float">
                 <img
-                  src={profileImage}
+                  src="/lovable-uploads/923aced1-e969-4089-9eef-0d80eb265732.png"
                   alt="Sahaya Savari"
                   className="w-full h-full object-cover rounded-full"
                 />
