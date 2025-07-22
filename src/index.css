@@ -226,3 +226,17 @@
     transform: translateY(0);
   }
 }
+
+/* Enhanced Profile Image Styles */
+.profile-image-enhanced {
+  object-position: center center;
+  object-fit: cover;
+  filter: brightness(1.0) contrast(1.05) saturate(1.0);
+  transition: all 0.3s ease-in-out;
+  transform: scale(1.02);
+}
+
+.profile-image-enhanced:hover {
+  transform: scale(1.08);
+  filter: brightness(1.05) contrast(1.1) saturate(1.05);
+}

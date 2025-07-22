@@ -201,19 +201,29 @@ export function PortfolioHome() {
               whileHover={{ scale: 1.05 }}
               className="relative"
             >
-              <div className="w-72 h-72 sm:w-80 sm:h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden glass-card p-2 glow-effect animate-float">
-                <img
-                  src="/lovable-uploads/923aced1-e969-4089-9eef-0d80eb265732.png"
-                  alt="Sahaya Savari"
-                  className="w-full h-full object-cover rounded-full"
-                />
+              {/* Main profile image container with improved styling */}
+              <div className="w-72 h-72 sm:w-80 sm:h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden glass-card p-2 glow-effect animate-float relative">
+                {/* Enhanced gradient border */}
+                <div className="absolute inset-0 rounded-full bg-gradient-to-br from-blue-500 via-purple-600 to-pink-500 p-2">
+                  <div className="w-full h-full rounded-full overflow-hidden bg-background">
+                    <img
+                      src="/src/assets/SAHAYASAVARI F.jpg"
+                      alt="Sahaya Savari F - Data Science & AI Student"
+                      className="w-full h-full object-cover rounded-full profile-image-enhanced"
+                      onError={(e) => {
+                        // Fallback to placeholder if main image fails
+                        e.currentTarget.src = "/src/assets/profile-placeholder.jpg";
+                      }}
+                    />
+                  </div>
+                </div>
               </div>
               
-              {/* Decorative elements */}
+              {/* Enhanced decorative elements */}
               <motion.div
                 animate={{ rotate: 360 }}
                 transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                className="absolute -top-4 -right-4 w-24 h-24 border-2 border-primary rounded-full opacity-20"
+                className="absolute -top-6 -right-6 w-32 h-32 border-2 border-primary/30 rounded-full opacity-40"
               />
               <motion.div
                 animate={{ rotate: -360 }}
