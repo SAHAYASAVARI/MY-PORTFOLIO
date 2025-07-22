@@ -7,6 +7,7 @@ import { Badge } from '../components/ui/badge';
 import { Input } from '../components/ui/input';
 import { Textarea } from '../components/ui/textarea';
 import { useToast } from '../hooks/use-toast';
+import { ParticleBackground } from '../components/ParticleBackground';
 
 
 export function PortfolioHome() {
@@ -105,8 +106,9 @@ export function PortfolioHome() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section id="home" className="min-h-screen flex items-center justify-center px-4 pt-16">
-        <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
+      <section id="home" className="min-h-screen flex items-center justify-center px-4 pt-16 relative overflow-hidden">
+        <ParticleBackground />
+        <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-12 items-center relative z-10">
           {/* Text Content */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
@@ -156,7 +158,7 @@ export function PortfolioHome() {
                 View Projects
               </Button>
               
-              <Button asChild variant="outline" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground bg-background/80 dark:bg-background/80">
+              <Button asChild variant="outline" className="border-primary/50 text-foreground hover:bg-primary hover:text-primary-foreground bg-background/90 dark:bg-background/90 dark:text-foreground">
                 <a href="/resume.pdf" download>
                   <Download className="mr-2 h-4 w-4" />
                   Download Resume
@@ -199,7 +201,7 @@ export function PortfolioHome() {
               whileHover={{ scale: 1.05 }}
               className="relative"
             >
-              <div className="w-80 h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden glass-card p-2 glow-effect animate-float">
+              <div className="w-72 h-72 sm:w-80 sm:h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden glass-card p-2 glow-effect animate-float">
                 <img
                   src="/lovable-uploads/923aced1-e969-4089-9eef-0d80eb265732.png"
                   alt="Sahaya Savari"
@@ -534,8 +536,9 @@ export function PortfolioHome() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="min-h-screen py-20 px-4">
-        <div className="max-w-4xl mx-auto">
+      <section id="contact" className="min-h-screen py-20 px-4 relative overflow-hidden">
+        <ParticleBackground />
+        <div className="max-w-4xl mx-auto relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -556,7 +559,7 @@ export function PortfolioHome() {
               initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
-              className="space-y-6"
+              className="space-y-8"
             >
               <div className="glass-card p-6">
                 <h3 className="text-xl font-bold mb-4">Contact Information</h3>
@@ -609,34 +612,39 @@ export function PortfolioHome() {
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <form onSubmit={handleSubmit} className="space-y-4">
+                  <form onSubmit={handleSubmit} className="space-y-6">
                     <div>
                       <Input
-                        placeholder="Your Name"
+                        placeholder="Enter your full name"
                         required
-                        className="bg-background/50"
+                        className="bg-background/70 dark:bg-background/70 border-border/50"
                       />
                     </div>
                     <div>
                       <Input
                         type="email"
-                        placeholder="Your Email"
+                        placeholder="Enter your email address"
                         required
-                        className="bg-background/50"
+                        className="bg-background/70 dark:bg-background/70 border-border/50"
                       />
                     </div>
                     <div>
                       <Textarea
-                        placeholder="Your Message"
+                        placeholder="Tell me about your project or inquiry..."
                         rows={5}
                         required
-                        className="bg-background/50"
+                        className="bg-background/70 dark:bg-background/70 border-border/50"
                       />
                     </div>
-                    <Button type="submit" className="w-full">
-                      <Send className="mr-2 h-4 w-4" />
-                      Send Message
-                    </Button>
+                    <motion.div
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                    >
+                      <Button type="submit" className="w-full bg-primary hover:bg-primary/90 text-primary-foreground">
+                        <Send className="mr-2 h-4 w-4" />
+                        Send Message
+                      </Button>
+                    </motion.div>
                   </form>
                 </CardContent>
               </Card>
