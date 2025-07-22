@@ -26,7 +26,7 @@ export function PortfolioHome() {
       { name: 'Java', level: 75 },
       { name: 'HTML/CSS', level: 80 },
       { name: 'Data Analysis', level: 75 },
-      { name: 'Machine Learning', level: 70 }
+      { name: 'Coding', level: 70 }
     ],
     tools: [
       'Power BI', 'Excel', 'Eclipse', 'Weka', 'Google Colab', 'R-Studio'
@@ -121,7 +121,7 @@ export function PortfolioHome() {
               className="text-5xl lg:text-7xl font-bold"
             >
               Hi, I'm{' '}
-              <span className="text-gradient">Sahaya Savari</span>
+              <span className="text-gradient">SAHAYA SAVARI</span>
             </motion.h1>
 
             <motion.p
@@ -156,7 +156,7 @@ export function PortfolioHome() {
                 View Projects
               </Button>
               
-              <Button asChild variant="outline" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground">
+              <Button asChild variant="outline" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground bg-background/80 dark:bg-background/80">
                 <a href="/resume.pdf" download>
                   <Download className="mr-2 h-4 w-4" />
                   Download Resume
