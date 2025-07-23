@@ -28,7 +28,7 @@ export function PortfolioHome() {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const socialLinks = [
-    { icon: Github, href: 'https://github.com/SAHAYASAVARI', label: 'GitHub' },
+    { icon: Github, href: 'https://github.com/Itzmesavari', label: 'GitHub' },
     { icon: Linkedin, href: 'https://www.linkedin.com/in/sahayasavari', label: 'LinkedIn' },
     { icon: Instagram, href: 'https://instagram.com/_itz_me_santhoz', label: 'Instagram' },
     { icon: MessageCircle, href: 'https://wa.me/916385648514', label: 'WhatsApp' },
@@ -56,22 +56,22 @@ export function PortfolioHome() {
       title: 'Data Analytics Dashboard',
       description: 'Interactive dashboard for data visualization using Power BI and Python',
       tech: ['Python', 'Power BI', 'Data Analysis'],
-      github: 'https://github.com/SAHAYASAVARI',
+      github: 'https://github.com/Itzmesavari',
       demo: '#'
     },
     {
       title: 'ML Prediction Model',
       description: 'Machine learning model for predictive analysis using various algorithms',
       tech: ['Python', 'Scikit-learn', 'Pandas'],
-      github: 'https://github.com/SAHAYASAVARI',
+      github: 'https://github.com/Itzmesavari',
       demo: '#'
     },
     {
       title: 'Web Portfolio',
       description: 'Responsive portfolio website with modern design and animations',
       tech: ['React', 'Tailwind CSS', 'Framer Motion'],
-      github: 'https://github.com/SAHAYASAVARI',
-      demo: '#'
+      github: 'https://github.com/Itzmesavari/Sahaya_Savari_F-portfolio',
+      demo: 'https://sahayasavari.web.app'
     }
   ];
 
