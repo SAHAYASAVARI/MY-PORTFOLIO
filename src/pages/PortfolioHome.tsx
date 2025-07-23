@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowDown, Download, Github, Linkedin, Instagram, MessageCircle, ExternalLink, Code, Brain, Palette, Target, MapPin, Calendar, GraduationCap, Award, Mail, Phone, Send } from 'lucide-react';
 import { Button } from '../components/ui/button';
@@ -8,10 +8,24 @@ import { Input } from '../components/ui/input';
 import { Textarea } from '../components/ui/textarea';
 import { useToast } from '../hooks/use-toast';
 import { ParticleBackground } from '../components/ParticleBackground';
+import ReCAPTCHA from 'react-google-recaptcha';
+import { Captcha } from '../components/ui/captcha';
+import { CopyrightProtection, CopyrightFooter } from '../components/CopyrightProtection';
+// Import your profile image
+import profileImage from '../assets/SAHAYASAVARI F.jpg';
+// Import your resume
+import resumeFile from '../assets/SAHAYA SAVARI RESUME FINAL.pdf';
 
 
 export function PortfolioHome() {
   const { toast } = useToast();
+  const recaptchaRef = useRef<ReCAPTCHA>(null);
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: ''
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const socialLinks = [
     { icon: Github, href: 'https://github.com/SAHAYASAVARI', label: 'GitHub' },
@@ -88,68 +102,144 @@ export function PortfolioHome() {
     'Mastering Excel Data Analysis & Dashboard Reporting - UDEMY'
   ];
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    toast({
-      title: "Message Sent!",
-      description: "Thank you for your message. I'll get back to you soon!",
-    });
+    
+    // Check if CAPTCHA is completed
+    const captchaValue = recaptchaRef.current?.getValue();
+    if (!captchaValue) {
+      toast({
+        title: "Please complete the CAPTCHA",
+        description: "Please verify that you are not a robot.",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      // Option 1: Simple frontend-only validation (current implementation)
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      // Option 2: Send to backend for verification (uncomment when backend is ready)
+      /*
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ...formData,
+          captchaToken: captchaValue
+        })
+      });
+      
+      const result = await response.json();
+      
+      if (!response.ok) {
+        throw new Error(result.message || 'Failed to send message');
+      }
+      */
+
+      toast({
+        title: "Message Sent!",
+        description: "Thank you for your message. I'll get back to you soon!",
+      });
+
+      // Reset form
+      setFormData({ name: '', email: '', message: '' });
+      recaptchaRef.current?.reset();
+    } catch (error) {
+      toast({
+        title: "Error sending message",
+        description: error instanceof Error ? error.message : "Something went wrong. Please try again.",
+        variant: "destructive"
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
   };
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      // Enhanced scroll behavior for better mobile support
+      const offsetTop = element.offsetTop - 80; // Account for any fixed headers
+      window.scrollTo({ 
+        top: offsetTop, 
+        behavior: 'smooth' 
+      });
+      
+      // Alternative method for better mobile compatibility
+      if (!window.scrollTo || window.scrollTo.toString().indexOf('[native code]') === -1) {
+        element.scrollIntoView({ 
+          behavior: 'smooth', 
+          block: 'start',
+          inline: 'nearest'
+        });
+      }
     }
   };
 
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section id="home" className="min-h-screen flex items-center justify-center px-4 pt-16 relative overflow-hidden">
+      <section id="home" className="min-h-screen flex items-center justify-center px-4 py-8 pt-20 relative overflow-hidden">
         <ParticleBackground />
-        <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-12 items-center relative z-10">
+        <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-8 lg:gap-12 items-center relative z-10">
           {/* Text Content */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
-            className="space-y-6"
+            className="space-y-4 lg:space-y-6 text-center lg:text-left order-2 lg:order-1"
           >
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.8 }}
-              className="text-5xl lg:text-7xl font-bold"
+              className="text-3xl sm:text-4xl lg:text-5xl xl:text-7xl font-bold leading-tight"
             >
               Hi, I'm{' '}
-              <span className="text-gradient">SAHAYA SAVARI</span>
+              <span className="text-gradient bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
+                SAHAYA SAVARI
+              </span>
             </motion.h1>
 
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.8 }}
-              className="text-xl lg:text-2xl text-muted-foreground"
+              className="text-lg sm:text-xl lg:text-2xl text-muted-foreground font-medium"
             >
-              Aspiring Data Science & AI Student
+              Data Science Student & Future AI Engineer
             </motion.p>
 
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6, duration: 0.8 }}
-              className="text-lg text-muted-foreground max-w-2xl"
+              className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto lg:mx-0 leading-relaxed"
             >
-              Passionate about transforming data into insights and building intelligent systems. 
-              Currently exploring the fascinating world of machine learning and artificial intelligence.
+              Passionate about transforming complex data into actionable insights and developing intelligent systems. 
+              Currently pursuing B.Sc Data Science, with expertise in Python, Machine Learning, and Data Analytics. 
+              Ready to contribute to innovative AI solutions that shape the future.
             </motion.p>
 
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.8, duration: 0.8 }}
-              className="flex flex-wrap gap-4"
+              className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 justify-center lg:justify-start"
             >
               <Button 
                 onClick={() => scrollToSection('projects')}
@@ -159,7 +249,7 @@ export function PortfolioHome() {
               </Button>
               
               <Button asChild variant="outline" className="border-primary/50 text-foreground hover:bg-primary hover:text-primary-foreground bg-background/90 dark:bg-background/90 dark:text-foreground">
-                <a href="/resume.pdf" download>
+                <a href={resumeFile} download="Sahaya_Savari_Resume.pdf">
                   <Download className="mr-2 h-4 w-4" />
                   Download Resume
                 </a>
@@ -171,7 +261,7 @@ export function PortfolioHome() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1, duration: 0.8 }}
-              className="flex space-x-4"
+              className="flex space-x-3 sm:space-x-4 justify-center lg:justify-start"
             >
               {socialLinks.map((social, index) => (
                 <motion.a
@@ -195,66 +285,120 @@ export function PortfolioHome() {
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
-            className="flex justify-center lg:justify-end"
+            className="flex justify-center order-1 lg:order-2 lg:justify-end"
           >
             <motion.div
               whileHover={{ scale: 1.05 }}
-              className="relative"
+              className="relative group"
             >
-              {/* Main profile image container with improved styling */}
-              <div className="w-72 h-72 sm:w-80 sm:h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden glass-card p-2 glow-effect animate-float relative">
-                {/* Enhanced gradient border */}
-                <div className="absolute inset-0 rounded-full bg-gradient-to-br from-blue-500 via-purple-600 to-pink-500 p-2">
-                  <div className="w-full h-full rounded-full overflow-hidden bg-background">
-                    <img
-                      src="/src/assets/SAHAYASAVARI F.jpg"
-                      alt="Sahaya Savari F - Data Science & AI Student"
-                      className="w-full h-full object-cover rounded-full profile-image-enhanced"
-                      onError={(e) => {
-                        // Fallback to placeholder if main image fails
-                        e.currentTarget.src = "/src/assets/profile-placeholder.jpg";
-                      }}
-                    />
+              {/* Enhanced profile image container with improved styling */}
+              <div className="w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 lg:w-[400px] lg:h-[400px] xl:w-[450px] xl:h-[450px] rounded-full overflow-hidden glass-card glow-effect animate-float relative bg-gradient-to-br from-primary/10 to-secondary/10 backdrop-blur-sm">
+                {/* Enhanced gradient border with better visual appeal */}
+                <div className="absolute inset-3 rounded-full bg-gradient-to-br from-blue-400 via-purple-500 to-pink-500 p-1 shadow-2xl">
+                  <div className="w-full h-full rounded-full overflow-hidden bg-gradient-to-br from-slate-900 to-slate-800 dark:from-slate-100 dark:to-slate-200 p-1">
+                    {/* Main image container with enhanced styling */}
+                    <div className="w-full h-full rounded-full overflow-hidden bg-background relative shadow-inner">
+                      <img
+                        src={profileImage}
+                        alt="Sahaya Savari F - Data Science & AI Student"
+                        className="w-full h-full object-cover object-center profile-image-enhanced transition-all duration-500 group-hover:scale-110"
+                        onError={(e) => {
+                          // Enhanced fallback with avatar initials
+                          console.log('Profile image failed to load, using fallback');
+                          const img = e.target as HTMLImageElement;
+                          img.style.display = 'none';
+                          // Create a fallback div with initials
+                          const fallback = document.createElement('div');
+                          fallback.className = 'w-full h-full flex items-center justify-center bg-gradient-to-br from-primary to-secondary text-primary-foreground text-6xl font-bold';
+                          fallback.textContent = 'SS';
+                          img.parentNode?.appendChild(fallback);
+                        }}
+                        onLoad={() => {
+                          console.log('Profile image loaded successfully');
+                        }}
+                      />
+                      
+                      {/* Subtle overlay for better text contrast */}
+                      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/10 dark:to-white/10 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    </div>
                   </div>
+                </div>
+                
+                {/* Professional badge/indicator */}
+                <div className="absolute bottom-4 right-4 bg-primary/90 backdrop-blur-sm text-primary-foreground px-3 py-1 rounded-full text-xs font-medium shadow-lg opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
+                  Data Scientist
                 </div>
               </div>
               
-              {/* Enhanced decorative elements */}
+              {/* Enhanced decorative elements with better responsiveness */}
               <motion.div
                 animate={{ rotate: 360 }}
                 transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                className="absolute -top-6 -right-6 w-32 h-32 border-2 border-primary/30 rounded-full opacity-40"
+                className="absolute -top-6 -right-6 sm:-top-8 sm:-right-8 w-32 h-32 sm:w-40 sm:h-40 border-2 border-primary/20 rounded-full opacity-30 hidden sm:block group-hover:border-primary/40 group-hover:opacity-50 transition-all duration-300"
               />
               <motion.div
                 animate={{ rotate: -360 }}
-                transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-                className="absolute -bottom-8 -left-8 w-32 h-32 border border-primary rounded-full opacity-10"
+                transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+                className="absolute -bottom-8 -left-8 sm:-bottom-10 sm:-left-10 w-28 h-28 sm:w-36 sm:h-36 border border-primary/15 rounded-full opacity-20 hidden sm:block group-hover:border-primary/30 group-hover:opacity-40 transition-all duration-300"
+              />
+              
+              {/* Additional floating elements for visual appeal */}
+              <motion.div
+                animate={{ 
+                  y: [0, -10, 0],
+                  opacity: [0.5, 1, 0.5]
+                }}
+                transition={{ 
+                  duration: 3, 
+                  repeat: Infinity,
+                  delay: 0.5
+                }}
+                className="absolute top-8 left-8 w-2 h-2 bg-primary rounded-full hidden lg:block"
+              />
+              <motion.div
+                animate={{ 
+                  y: [0, 10, 0],
+                  opacity: [0.3, 0.8, 0.3]
+                }}
+                transition={{ 
+                  duration: 4, 
+                  repeat: Infinity,
+                  delay: 1
+                }}
+                className="absolute bottom-12 right-12 w-3 h-3 bg-secondary rounded-full hidden lg:block"
               />
             </motion.div>
           </motion.div>
         </div>
 
-        {/* Scroll Indicator */}
+        {/* Enhanced Scroll Indicator - Mobile Optimized */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.2, duration: 0.8 }}
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+          className="absolute bottom-4 sm:bottom-8 left-1/2 transform -translate-x-1/2 z-20"
         >
           <motion.div
             animate={{ y: [0, 10, 0] }}
             transition={{ duration: 2, repeat: Infinity }}
-            className="flex flex-col items-center text-muted-foreground cursor-pointer"
+            className="flex flex-col items-center text-muted-foreground cursor-pointer touch-manipulation"
             onClick={() => scrollToSection('about')}
+            style={{ WebkitTapHighlightColor: 'transparent' }}
           >
-            <span className="text-sm mb-2">Scroll to explore</span>
-            <ArrowDown className="h-5 w-5" />
+            <span className="text-xs sm:text-sm mb-2 select-none">Scroll to explore</span>
+            <motion.div
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              className="p-2 rounded-full hover:bg-primary/10 transition-colors duration-200"
+            >
+              <ArrowDown className="h-4 w-4 sm:h-5 sm:w-5" />
+            </motion.div>
           </motion.div>
         </motion.div>
       </section>
 
       {/* About Section */}
-      <section id="about" className="min-h-screen py-20 px-4">
+      <section id="about" className="min-h-screen py-20 px-4 bg-dot-pattern">
         <div className="max-w-6xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -346,7 +490,7 @@ export function PortfolioHome() {
       </section>
 
       {/* Skills Section */}
-      <section id="skills" className="min-h-screen py-20 px-4 bg-muted/30">
+      <section id="skills" className="min-h-screen py-20 px-4 bg-muted/30 bg-mesh-gradient">
         <div className="max-w-6xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -413,7 +557,7 @@ export function PortfolioHome() {
       </section>
 
       {/* Projects Section */}
-      <section id="projects" className="min-h-screen py-20 px-4">
+      <section id="projects" className="min-h-screen py-20 px-4 bg-dot-pattern">
         <div className="max-w-6xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -477,7 +621,7 @@ export function PortfolioHome() {
       </section>
 
       {/* Blog Section */}
-      <section id="blog" className="py-20 px-4 bg-muted/30">
+      <section id="blog" className="py-20 px-4 bg-muted/30 bg-mesh-gradient">
         <div className="max-w-6xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -622,37 +766,60 @@ export function PortfolioHome() {
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <form onSubmit={handleSubmit} className="space-y-6">
+                  <form onSubmit={handleSubmit} className={`space-y-6 ${isSubmitting ? 'form-loading' : ''}`}>
                     <div>
                       <Input
+                        name="name"
+                        value={formData.name}
+                        onChange={handleInputChange}
                         placeholder="Enter your full name"
                         required
+                        disabled={isSubmitting}
                         className="bg-background/70 dark:bg-background/70 border-border/50"
                       />
                     </div>
                     <div>
                       <Input
                         type="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleInputChange}
                         placeholder="Enter your email address"
                         required
+                        disabled={isSubmitting}
                         className="bg-background/70 dark:bg-background/70 border-border/50"
                       />
                     </div>
                     <div>
                       <Textarea
+                        name="message"
+                        value={formData.message}
+                        onChange={handleInputChange}
                         placeholder="Tell me about your project or inquiry..."
                         rows={5}
                         required
+                        disabled={isSubmitting}
                         className="bg-background/70 dark:bg-background/70 border-border/50"
                       />
                     </div>
+                    
+                    {/* reCAPTCHA */}
+                    <Captcha
+                      ref={recaptchaRef}
+                      sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY || "6LeRrIwrAAAAAM_GgcdtCENdXDgz0gT46sjRW63f"}
+                    />
+                    
                     <motion.div
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
+                      whileHover={{ scale: isSubmitting ? 1 : 1.02 }}
+                      whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
                     >
-                      <Button type="submit" className="w-full bg-primary hover:bg-primary/90 text-primary-foreground">
+                      <Button 
+                        type="submit" 
+                        disabled={isSubmitting}
+                        className="w-full bg-primary hover:bg-primary/90 text-primary-foreground disabled:opacity-50 touch-manipulation"
+                      >
                         <Send className="mr-2 h-4 w-4" />
-                        Send Message
+                        {isSubmitting ? 'Sending...' : 'Send Message'}
                       </Button>
                     </motion.div>
                   </form>
@@ -662,6 +829,10 @@ export function PortfolioHome() {
           </div>
         </div>
       </section>
+      
+      {/* Copyright Protection & Footer */}
+      <CopyrightProtection />
+      <CopyrightFooter />
     </div>
   );
 }
