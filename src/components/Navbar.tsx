@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Menu, X, Moon, Sun } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 import { Button } from './ui/button';
+import { AnimatedToggle } from './ui/animated-toggle';
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -56,34 +57,20 @@ export function Navbar() {
               </motion.button>
             ))}
             
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={toggleTheme}
-              className="hover:bg-primary/10"
-            >
-              {theme === 'dark' ? (
-                <Sun className="h-5 w-5" />
-              ) : (
-                <Moon className="h-5 w-5" />
-              )}
-            </Button>
+            {/* Animated Theme Toggle */}
+            <AnimatedToggle 
+              isOn={theme === 'light'} 
+              onToggle={toggleTheme} 
+            />
           </div>
 
           {/* Mobile Menu Button */}
           <div className="md:hidden flex items-center space-x-2">
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={toggleTheme}
-              className="hover:bg-primary/10"
-            >
-              {theme === 'dark' ? (
-                <Sun className="h-5 w-5" />
-              ) : (
-                <Moon className="h-5 w-5" />
-              )}
-            </Button>
+            {/* Mobile Theme Toggle */}
+            <AnimatedToggle 
+              isOn={theme === 'light'} 
+              onToggle={toggleTheme} 
+            />
             
             <Button
               variant="ghost"

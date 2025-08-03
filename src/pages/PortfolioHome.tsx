@@ -13,8 +13,7 @@ import { Captcha } from '../components/ui/captcha';
 import { CopyrightProtection, CopyrightFooter } from '../components/CopyrightProtection';
 // Import your profile image
 import profileImage from '../assets/SAHAYASAVARI F.jpg';
-// Import your resume
-import resumeFile from '../assets/SAHAYA SAVARI RESUME FINAL.pdf';
+// Resume file is now served from public folder
 
 
 export function PortfolioHome() {
@@ -56,15 +55,15 @@ export function PortfolioHome() {
       title: 'Data Analytics Dashboard',
       description: 'Interactive dashboard for data visualization using Power BI and Python',
       tech: ['Python', 'Power BI', 'Data Analysis'],
-      github: 'https://github.com/Itzmesavari',
-      demo: '#'
+      github: 'https://github.com/Itzmesavari/data-analytics-dashboard',
+      demo: 'https://itzmesavari.github.io/data-analytics-dashboard'
     },
     {
       title: 'ML Prediction Model',
       description: 'Machine learning model for predictive analysis using various algorithms',
       tech: ['Python', 'Scikit-learn', 'Pandas'],
-      github: 'https://github.com/Itzmesavari',
-      demo: '#'
+      github: 'https://github.com/Itzmesavari/ml-prediction-model',
+      demo: 'https://itzmesavari.github.io/ml-prediction-model'
     },
     {
       title: 'Web Portfolio',
@@ -195,22 +194,23 @@ export function PortfolioHome() {
       {/* Hero Section */}
       <section id="home" className="min-h-screen flex items-center justify-center px-4 py-8 pt-20 relative overflow-hidden">
         <ParticleBackground />
-        <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-8 lg:gap-12 items-center relative z-10">
+        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-8 lg:gap-16 items-center relative z-10">
           {/* Text Content */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
-            className="space-y-4 lg:space-y-6 text-center lg:text-left order-2 lg:order-1"
+            className="space-y-6 lg:space-y-8 text-center lg:text-left order-2 lg:order-1 flex flex-col justify-center px-4 lg:px-0"
           >
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.8 }}
-              className="text-3xl sm:text-4xl lg:text-5xl xl:text-7xl font-bold leading-tight"
+              className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight tracking-tight"
+              style={{ fontFamily: 'Poppins, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' }}
             >
-              Hi, I'm{' '}
-              <span className="text-gradient bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
+              <div className="mb-2">Hi, I'm</div>
+              <span className="text-gradient bg-gradient-to-r from-blue-500 via-purple-600 to-pink-500 bg-clip-text text-transparent block">
                 SAHAYA SAVARI
               </span>
             </motion.h1>
@@ -219,7 +219,8 @@ export function PortfolioHome() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.8 }}
-              className="text-lg sm:text-xl lg:text-2xl text-muted-foreground font-medium"
+              className="text-lg sm:text-xl lg:text-2xl text-muted-foreground font-medium mt-4"
+              style={{ fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' }}
             >
               Data Science Student & Future AI Engineer
             </motion.p>
@@ -228,7 +229,8 @@ export function PortfolioHome() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6, duration: 0.8 }}
-              className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto lg:mx-0 leading-relaxed"
+              className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto lg:mx-0 leading-relaxed mt-6"
+              style={{ fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' }}
             >
               Passionate about transforming complex data into actionable insights and developing intelligent systems. 
               Currently pursuing B.Sc Data Science, with expertise in Python, Machine Learning, and Data Analytics. 
@@ -239,7 +241,7 @@ export function PortfolioHome() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.8, duration: 0.8 }}
-              className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 justify-center lg:justify-start"
+              className="flex flex-col sm:flex-row flex-wrap gap-4 sm:gap-6 justify-center lg:justify-start mt-8"
             >
               <Button 
                 onClick={() => scrollToSection('projects')}
@@ -248,8 +250,26 @@ export function PortfolioHome() {
                 View Projects
               </Button>
               
+              {/* View Resume Button - Opens PDF in new tab with working links */}
               <Button asChild variant="outline" className="border-primary/50 text-foreground hover:bg-primary hover:text-primary-foreground bg-background/90 dark:bg-background/90 dark:text-foreground">
-                <a href={resumeFile} download="Sahaya_Savari_Resume.pdf">
+                <a 
+                  href="/SAHAYASAVARI_FINAL_RESUME.pdf" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  aria-label="View resume in new tab"
+                >
+                  <ExternalLink className="mr-2 h-4 w-4" />
+                  View Resume
+                </a>
+              </Button>
+              
+              {/* Download Resume Button */}
+              <Button asChild variant="outline" className="border-primary/50 text-foreground hover:bg-primary hover:text-primary-foreground bg-background/90 dark:bg-background/90 dark:text-foreground">
+                <a 
+                  href="/SAHAYASAVARI_FINAL_RESUME.pdf" 
+                  download="SAHAYASAVARI_FINAL_RESUME.pdf"
+                  aria-label="Download resume PDF"
+                >
                   <Download className="mr-2 h-4 w-4" />
                   Download Resume
                 </a>
@@ -261,7 +281,7 @@ export function PortfolioHome() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1, duration: 0.8 }}
-              className="flex space-x-3 sm:space-x-4 justify-center lg:justify-start"
+              className="flex space-x-4 sm:space-x-6 justify-center lg:justify-start mt-8"
             >
               {socialLinks.map((social, index) => (
                 <motion.a
@@ -285,14 +305,14 @@ export function PortfolioHome() {
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
-            className="flex justify-center order-1 lg:order-2 lg:justify-end"
+            className="flex justify-center order-1 lg:order-2 lg:justify-end items-center"
           >
             <motion.div
               whileHover={{ scale: 1.05 }}
               className="relative group"
             >
               {/* Enhanced profile image container with improved styling */}
-              <div className="w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 lg:w-[400px] lg:h-[400px] xl:w-[450px] xl:h-[450px] rounded-full overflow-hidden glass-card glow-effect animate-float relative bg-gradient-to-br from-primary/10 to-secondary/10 backdrop-blur-sm">
+              <div className="w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 lg:w-72 lg:h-72 xl:w-80 xl:h-80 rounded-full overflow-hidden glass-card glow-effect animate-float relative bg-gradient-to-br from-primary/10 to-secondary/10 backdrop-blur-sm">
                 {/* Enhanced gradient border with better visual appeal */}
                 <div className="absolute inset-3 rounded-full bg-gradient-to-br from-blue-400 via-purple-500 to-pink-500 p-1 shadow-2xl">
                   <div className="w-full h-full rounded-full overflow-hidden bg-gradient-to-br from-slate-900 to-slate-800 dark:from-slate-100 dark:to-slate-200 p-1">
@@ -300,7 +320,7 @@ export function PortfolioHome() {
                     <div className="w-full h-full rounded-full overflow-hidden bg-background relative shadow-inner">
                       <img
                         src={profileImage}
-                        alt="Sahaya Savari F - Data Science & AI Student"
+                        alt=""
                         className="w-full h-full object-cover object-center profile-image-enhanced transition-all duration-500 group-hover:scale-110"
                         onError={(e) => {
                           // Enhanced fallback with avatar initials
@@ -324,22 +344,19 @@ export function PortfolioHome() {
                   </div>
                 </div>
                 
-                {/* Professional badge/indicator */}
-                <div className="absolute bottom-4 right-4 bg-primary/90 backdrop-blur-sm text-primary-foreground px-3 py-1 rounded-full text-xs font-medium shadow-lg opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
-                  Data Scientist
-                </div>
+                {/* Removed the "Data Scientist" badge that was causing tooltip issues */}
               </div>
               
               {/* Enhanced decorative elements with better responsiveness */}
               <motion.div
                 animate={{ rotate: 360 }}
                 transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                className="absolute -top-6 -right-6 sm:-top-8 sm:-right-8 w-32 h-32 sm:w-40 sm:h-40 border-2 border-primary/20 rounded-full opacity-30 hidden sm:block group-hover:border-primary/40 group-hover:opacity-50 transition-all duration-300"
+                className="absolute -top-4 -right-4 sm:-top-6 sm:-right-6 w-24 h-24 sm:w-28 sm:h-28 border-2 border-primary/20 rounded-full opacity-30 hidden sm:block group-hover:border-primary/40 group-hover:opacity-50 transition-all duration-300"
               />
               <motion.div
                 animate={{ rotate: -360 }}
                 transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-                className="absolute -bottom-8 -left-8 sm:-bottom-10 sm:-left-10 w-28 h-28 sm:w-36 sm:h-36 border border-primary/15 rounded-full opacity-20 hidden sm:block group-hover:border-primary/30 group-hover:opacity-40 transition-all duration-300"
+                className="absolute -bottom-6 -left-6 sm:-bottom-8 sm:-left-8 w-20 h-20 sm:w-24 sm:h-24 border border-primary/15 rounded-full opacity-20 hidden sm:block group-hover:border-primary/30 group-hover:opacity-40 transition-all duration-300"
               />
               
               {/* Additional floating elements for visual appeal */}
@@ -600,13 +617,21 @@ export function PortfolioHome() {
                     </div>
                     <div className="flex gap-3">
                       <Button asChild size="sm" variant="outline">
-                        <a href={project.github} target="_blank" rel="noopener noreferrer">
+                        <a 
+                          href={project.github.includes('data-analytics-dashboard') || project.github.includes('ml-prediction-model') ? '/404' : project.github}
+                          target={project.github.includes('data-analytics-dashboard') || project.github.includes('ml-prediction-model') ? '_self' : '_blank'}
+                          rel="noopener noreferrer"
+                        >
                           <Github className="mr-2 h-4 w-4" />
                           Code
                         </a>
                       </Button>
                       <Button asChild size="sm">
-                        <a href={project.demo} target="_blank" rel="noopener noreferrer">
+                        <a 
+                          href={project.demo.includes('data-analytics-dashboard') || project.demo.includes('ml-prediction-model') ? '/404' : project.demo}
+                          target={project.demo.includes('data-analytics-dashboard') || project.demo.includes('ml-prediction-model') ? '_self' : '_blank'}
+                          rel="noopener noreferrer"
+                        >
                           <ExternalLink className="mr-2 h-4 w-4" />
                           Demo
                         </a>
