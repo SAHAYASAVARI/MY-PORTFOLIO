@@ -85,8 +85,8 @@ MY-PORTFOLIO/
 ### Installation
 ```bash
 # Clone the repository
-git clone https://github.com/SAHAYASAVARI/MY-PORTFOLIO.git
-cd MY-PORTFOLIO
+git clone https://github.com/Itzmesavari/Sahaya_Savari_F-portfolio.git
+cd Sahaya_Savari_F-portfolio
 
 # Install dependencies
 npm install
@@ -237,7 +237,7 @@ npm install --save-dev @types/react @types/react-dom
 If you encounter any issues or have questions:
 
 - 📧 **Email**: sahayasavari@gmail.com
-- 🐙 **GitHub**: [@SAHAYASAVARI](https://github.com/SAHAYASAVARI)
+- 🐙 **GitHub**: [@Itzmesavari](https://github.com/Itzmesavari)
 - 💼 **LinkedIn**: [sahayasavari](https://www.linkedin.com/in/sahayasavari)
 
 ## 📄 License

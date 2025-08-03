@@ -119,9 +119,9 @@ Dear GitHub Support,
 I am reporting a repository that contains unauthorized copies of my copyrighted portfolio content.
 
 **My Original Repository/Website:**
-- GitHub: https://github.com/SAHAYASAVARI/MY-PORTFOLIO
+- GitHub: https://github.com/Itzmesavari/Sahaya_Savari_F-portfolio
 - Live Site: https://sahayasavari.web.app
-- Owner: Sahaya Savari F (@SAHAYASAVARI)
+- Owner: Sahaya Savari F (@Itzmesavari)
 
 **Infringing Repository:**
 - URL: [COPIED_REPO_URL]
@@ -136,7 +136,7 @@ I am reporting a repository that contains unauthorized copies of my copyrighted 
 I request that you remove or disable access to the infringing repository in accordance with GitHub's Terms of Service and the DMCA.
 
 **Contact Information:**
-- GitHub: @SAHAYASAVARI
+- GitHub: @Itzmesavari
 - Email: sahayasavari@gmail.com
 - Website: https://sahayasavari.web.app
 
