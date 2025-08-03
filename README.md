@@ -5,6 +5,9 @@ A modern, responsive portfolio website built with **React 18**, **TypeScript**, 
 ![Portfolio Preview](https://img.shields.io/badge/Status-Production%20Ready-brightgreen)
 ![Build Status](https://img.shields.io/badge/Build-Passing-success)
 ![Version](https://img.shields.io/badge/Version-2.0-blue)
+![License](https://img.shields.io/badge/License-MIT-green)
+![React](https://img.shields.io/badge/React-18.3-blue)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.5-blue)
 
 ## ✨ Features
 
