@@ -55,25 +55,71 @@ A modern, responsive portfolio website built with **React 18**, **TypeScript**, 
 
 ```
 MY-PORTFOLIO/
-├── src/
-│   ├── components/           # Reusable UI components
-│   │   ├── ui/              # Base UI components (buttons, cards, etc.)
-│   │   ├── EntryGate.tsx    # Security entry point
-│   │   ├── AdminBypass.tsx  # Admin authentication
-│   │   ├── Navbar.tsx       # Navigation component
-│   │   └── ParticleBackground.tsx
-│   ├── pages/
-│   │   └── PortfolioHome.tsx # Main portfolio page
-│   ├── utils/
-│   │   ├── security.ts      # Security utilities
-│   │   └── secureAdmin.ts   # Admin security system
-│   ├── assets/              # Images, resume, and static files
-│   ├── contexts/            # React contexts (theme, etc.)
-│   └── hooks/               # Custom React hooks
-├── public/                  # Public assets
-├── .env.local              # Development environment
-├── .env.production         # Production environment
-└── docs/                   # Documentation files
+├── 📁 public/                    # Public assets & static files
+│   ├── 📄 SAHAYASAVARI_FINAL_RESUME.pdf
+│   ├── 🎮 mario-404.css         # Mario 404 page styles
+│   ├── 🎮 mario-404.js          # Mario 404 page scripts
+│   ├── 🖼️ lovable-uploads/       # Image assets
+│   ├── 🌐 robots.txt
+│   └── 🔖 favicon.ico
+├── 📁 src/                       # Source code
+│   ├── 📁 components/            # React components
+│   │   ├── 📁 ui/               # Reusable UI components
+│   │   │   ├── button.tsx       # Button component
+│   │   │   ├── card.tsx         # Card component
+│   │   │   ├── animated-toggle.tsx # Theme toggle
+│   │   │   └── ... (40+ UI components)
+│   │   ├── AdminBypass.tsx      # Admin authentication
+│   │   ├── CopyrightProtection.tsx # Copyright system
+│   │   ├── EntryGate.tsx        # Security entry point
+│   │   ├── Layout.tsx           # App layout wrapper
+│   │   ├── Navbar.tsx           # Navigation component
+│   │   ├── ParticleBackground.tsx # Background effects
+│   │   └── Scene3D.tsx          # 3D scene component
+│   ├── 📁 pages/                # Application pages
+│   │   ├── NotFound.tsx         # 404 page (Mario themed)
+│   │   └── PortfolioHome.tsx    # Main portfolio page
+│   ├── 📁 contexts/             # React contexts
+│   │   └── ThemeContext.tsx     # Theme management
+│   ├── 📁 hooks/                # Custom React hooks
+│   │   ├── use-mobile.tsx       # Mobile detection
+│   │   └── use-toast.ts         # Toast notifications
+│   ├── 📁 lib/                  # Utility libraries
+│   │   └── utils.ts             # Common utilities
+│   ├── 📁 utils/                # Security & utility functions
+│   │   ├── security.ts          # Security utilities
+│   │   └── secureAdmin.ts       # Admin security system
+│   ├── 📁 assets/               # Images, fonts, static resources
+│   │   ├── SAHAYASAVARI F.jpg   # Profile image
+│   │   └── SAHAYASAVARI FINAL RESUME.pdf
+│   ├── App.tsx                  # Main App component
+│   ├── main.tsx                 # Application entry point
+│   ├── index.css                # Global styles
+│   └── vite-env.d.ts           # TypeScript definitions
+├── 📁 .github/                  # GitHub workflows & templates
+├── 📁 docs/                     # Documentation files
+│   ├── COPYRIGHT_PROTECTION.md  # Copyright guidelines
+│   ├── DEPLOYMENT-GUIDE.md      # Deployment instructions
+│   ├── EMAIL_TEMPLATES.md       # Contact templates
+│   └── SECURITY-DOCUMENTATION.md # Security docs
+├── ⚙️ Configuration Files
+│   ├── package.json             # Dependencies & scripts
+│   ├── vite.config.ts          # Vite configuration
+│   ├── tailwind.config.ts      # Tailwind CSS config
+│   ├── tsconfig.json           # TypeScript config
+│   ├── eslint.config.js        # ESLint configuration
+│   ├── postcss.config.js       # PostCSS config
+│   ├── components.json         # UI components config
+│   └── firebase.json           # Firebase config
+├── 🔐 Environment Files
+│   ├── .env.local              # Development environment
+│   ├── .env.production         # Production environment
+│   └── .env.example            # Environment template
+└── 📋 Project Files
+    ├── README.md               # Project documentation
+    ├── LICENSE                 # MIT License
+    ├── .gitignore             # Git ignore rules
+    └── verify-deployment.js    # Deployment verification
 ```
 
 ## 🚀 Quick Start
@@ -97,14 +143,26 @@ npm run dev
 
 ### Available Scripts
 ```bash
+# Development
 npm run dev              # Start development server
+npm run preview          # Preview production build
+
+# Building
 npm run build            # Build for production
 npm run build:prod       # Optimized production build
-npm run preview          # Preview production build
+
+# Code Quality
 npm run lint             # Run ESLint
-npm run clean            # Clean build cache
+npm run lint:fix         # Fix ESLint issues automatically
+npm run type-check       # TypeScript type checking
+
+# Deployment
 npm run deploy:firebase  # Deploy to Firebase
 npm run deploy:netlify   # Deploy to Netlify
+
+# Utilities
+npm run clean            # Clean build cache
+npm run analyze          # Analyze bundle size
 ```
 
 ## 🔧 Configuration
@@ -148,7 +206,7 @@ npm run deploy:firebase  # or deploy:netlify
 - **Vercel** 
 - **GitHub Pages**
 
-📖 **Complete deployment guide available in [DEPLOYMENT-GUIDE.md](./DEPLOYMENT-GUIDE.md)**
+📖 **Complete deployment guide available in [docs/DEPLOYMENT-GUIDE.md](./docs/DEPLOYMENT-GUIDE.md)**
 
 ## 🔒 Security Features
 
@@ -169,7 +227,7 @@ npm run deploy:firebase  # or deploy:netlify
 - Copy/paste prevention
 - Developer tools monitoring
 
-📋 **Detailed security documentation in [SECURITY-DOCUMENTATION.md](./SECURITY-DOCUMENTATION.md)**
+📋 **Detailed security documentation in [docs/SECURITY-DOCUMENTATION.md](./docs/SECURITY-DOCUMENTATION.md)**
 
 ## 📊 Performance
 

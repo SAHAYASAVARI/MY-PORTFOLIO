@@ -11,10 +11,12 @@
     "build:prod": "vite build --mode production",
     "preview": "vite preview",
     "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "clean": "rmdir /s /q dist && rmdir /s /q node_modules\\.vite || echo Clean completed",
     "deploy:firebase": "npm run build:prod && firebase deploy",
     "deploy:netlify": "npm run build:prod && netlify deploy --prod --dir=dist",
-    "analyze": "vite build --mode production --analyze"
+    "analyze": "vite build --mode production --analyze",
+    "type-check": "tsc --noEmit"
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
