@@ -69,7 +69,7 @@ Follow conventional commits:
 
 Feel free to reach out:
 - 📧 Email: sahayasavari@gmail.com
-- 🐙 GitHub: [@Itzmesavari](https://github.com/Itzmesavari)
+- 🐙 GitHub: [@aka-sahayasavari](https://github.com/aka-sahayasavari)
 - 💼 LinkedIn: [sahayasavari](https://www.linkedin.com/in/sahayasavari)
 
 ## 📄 License
