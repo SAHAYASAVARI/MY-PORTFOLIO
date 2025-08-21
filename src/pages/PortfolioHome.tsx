@@ -191,8 +191,8 @@ export function PortfolioHome() {
               className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto lg:mx-0 leading-relaxed mt-6"
               style={{ fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' }}
             >
-              Passionate about transforming complex data into actionable insights and developing intelligent systems. 
-              Currently pursuing B.Sc Data Science, with expertise in Python, Machine Learning, and Data Analytics. 
+              MSc Artificial Intelligence student passionate about transforming complex data into actionable insights and developing intelligent systems. 
+              Experienced in Python, Machine Learning, and Data Analytics, with a strong foundation in AI research and applications. 
               Ready to contribute to innovative AI solutions that shape the future.
             </motion.p>
 
@@ -437,11 +437,7 @@ export function PortfolioHome() {
               </div>
               
               <div className="mt-8">
-                <h4 className="font-semibold mb-4 flex items-center">
-                  <MapPin className="mr-2 h-4 w-4 text-primary" />
-                  Location
-                </h4>
-                <p className="text-muted-foreground">Madurai, Tamil Nadu</p>
+                {/* Location removed as per user request */}
               </div>
             </motion.div>
           </div>
